@@ -23,6 +23,7 @@ export const Entry = ({ entry, mood, onEditButtonClick, onDeleteButtonClick }) =
       <div className="message-body">
         <p className="entry__concept">{entry.concept}</p>
         <p className="entry__entry">{entry.entry}</p>
+        <p className="entry__mood">{entry.mood.label}</p>
         <p className="entry__date">{entry.date}</p>
         <p className="entry__mood">{mood?.label}</p>
         <div className="buttons">
