@@ -3,7 +3,6 @@ import "./Entry.css"
 export const EntryForm = ({ entry, moods, onFormSubmit, tags }) => {
     const [editMode, setEditMode] = useState(false)
     const [updatedEntry, setUpdatedEntry] = useState(entry)
-    console.log(tags)
     useEffect(() => {
         setUpdatedEntry(entry)
         if ('id' in entry) {
@@ -13,13 +12,24 @@ export const EntryForm = ({ entry, moods, onFormSubmit, tags }) => {
             setEditMode(false)
         }
     }, [entry])
+    entry.entry_tags = []
     const handleControlledInputChange = (event) => {
         /*
             When changing a state object or array, always create a new one
             and change state instead of modifying current one
         */
         const newEntry = { ...updatedEntry }
-        newEntry[event.target.name] = event.target.value
+        if (event.target.name === "entry_tags") {
+            if (newEntry.entry_tags?.includes(parseInt(event.target.value))) {
+                const index = newEntry.entry_tags.indexOf(parseInt(event.target.value));
+                newEntry.entry_tags.splice(index, 1)
+            }
+            else {
+                newEntry.entry_tags.push(parseInt(event.target.value))
+            }
+        } else {
+            newEntry[event.target.name] = event.target.value
+        }
         setUpdatedEntry(newEntry)
     }
 
@@ -81,7 +91,7 @@ export const EntryForm = ({ entry, moods, onFormSubmit, tags }) => {
                     </div>
                     <div className="field" id="entryTagsContainer">
                         {
-                            tags?.map(tag => {
+                            tags.map(tag => {
                                 return <>
                                     <div>
                                         <label htmlFor="tags" className="label">{tag.subject}</label>

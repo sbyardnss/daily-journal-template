@@ -23,7 +23,6 @@ export const EntryList = ({ moods, entries, onEditButtonClick, onDeleteButtonCli
     setMoodSelected(parseInt(moodId))
   }
 
-
   return (
     <article className="panel is-primary">
       <h1 className="panel-heading">Entries</h1>

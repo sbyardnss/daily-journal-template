@@ -17,7 +17,7 @@ export const Entry = ({ entry, mood, onEditButtonClick, onDeleteButtonClick, tag
       }
     }
   }
-
+  console.log(entry)
   return (
     <article className={`message ${getMessageType()}`} style={{width:"100%"}}>
       <div className="message-body">
@@ -26,6 +26,13 @@ export const Entry = ({ entry, mood, onEditButtonClick, onDeleteButtonClick, tag
         <p className="entry__mood">{entry.mood.label}</p>
         <p className="entry__date">{entry.date}</p>
         <p className="entry__mood">{mood?.label}</p>
+        <div>
+          {
+            entry.entry_tags.map(tag => {
+              return <div>{tag.subject}</div>
+            })
+          }
+        </div>
         <div className="buttons">
           <button className={`button ${getMessageType()} is-outlined`} onClick={
             () => {

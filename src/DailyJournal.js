@@ -50,7 +50,6 @@ export const DailyJournal = () => {
       mood_id: 0
     })
   }
-
   return (
     <div className="DailyJournal container">
       <div className="columns">
