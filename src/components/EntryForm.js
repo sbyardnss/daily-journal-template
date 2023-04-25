@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react"
-
-export const EntryForm = ({ entry, moods, onFormSubmit }) => {
+import "./Entry.css"
+export const EntryForm = ({ entry, moods, onFormSubmit, tags }) => {
     const [editMode, setEditMode] = useState(false)
     const [updatedEntry, setUpdatedEntry] = useState(entry)
-
+    console.log(tags)
     useEffect(() => {
         setUpdatedEntry(entry)
         if ('id' in entry) {
@@ -13,13 +13,12 @@ export const EntryForm = ({ entry, moods, onFormSubmit }) => {
             setEditMode(false)
         }
     }, [entry])
-
     const handleControlledInputChange = (event) => {
         /*
             When changing a state object or array, always create a new one
             and change state instead of modifying current one
         */
-        const newEntry ={...updatedEntry}
+        const newEntry = { ...updatedEntry }
         newEntry[event.target.name] = event.target.value
         setUpdatedEntry(newEntry)
     }
@@ -70,15 +69,30 @@ export const EntryForm = ({ entry, moods, onFormSubmit }) => {
                                     proptype="int"
                                     value={updatedEntry.mood_id}
                                     onChange={handleControlledInputChange}>
-                                        <option value="0">Select a mood</option>
-                                        {moods.map(m => (
-                                            <option key={m.id} value={m.id}>
-                                                {m.label}
-                                            </option>
-                                        ))}
+                                    <option value="0">Select a mood</option>
+                                    {moods.map(m => (
+                                        <option key={m.id} value={m.id}>
+                                            {m.label}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                         </div>
+                    </div>
+                    <div className="field" id="entryTagsContainer">
+                        {
+                            tags?.map(tag => {
+                                return <>
+                                    <div>
+                                        <label htmlFor="tags" className="label">{tag.subject}</label>
+                                        <input name="entry_tags"
+                                            type="checkbox"
+                                            value={tag.id}
+                                            onChange={handleControlledInputChange} />
+                                    </div>
+                                </>
+                            })
+                        }
                     </div>
                     <div className="field">
                         <div className="control">

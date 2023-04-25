@@ -1,6 +1,6 @@
 import React from "react";
 
-export const Entry = ({ entry, mood, onEditButtonClick, onDeleteButtonClick }) => {
+export const Entry = ({ entry, mood, onEditButtonClick, onDeleteButtonClick, tags }) => {
   const getMessageType = () => {
     if (mood) {
       switch (mood.label) {
